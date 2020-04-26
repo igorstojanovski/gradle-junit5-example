@@ -14,15 +14,25 @@ dependencies {
     testImplementation('org.junit.jupiter:junit-jupiter:5.6.2')
 }
 
-task unitTests(type: LoggedTests) {
+test {
+    useJUnitPlatform()
+}
+
+task unitTests(type: Test) {
     useJUnitPlatform {
         excludeTags 'IT'
     }
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
 }
 
-task integrationTests(type: LoggedTests) {
+task integrationTests(type: Test) {
     useJUnitPlatform {
         includeTags 'IT'
+    }
+    testLogging {
+        events "passed", "skipped", "failed"
     }
 }
 
